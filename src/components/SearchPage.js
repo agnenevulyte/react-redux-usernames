@@ -24,7 +24,7 @@ export default function SearchPage() {
   // 5. Fetch the users and store them in results state
   const getUsers = async () => {
     try {
-      let response = await fetch(`https://jsonplaceholder.typicode.com/users`);
+      let response = await fetch(`https://jsonplaceholder.typicode.com/albums`);
       let data = await response.json();
       return setResults(data);
     } catch (err) {
@@ -35,7 +35,7 @@ export default function SearchPage() {
   // 8. filtering state `results`
   const filterResults = () => {
     const updatedResults = results.filter(result => {
-      const allCaps = result.username.toUpperCase();
+      const allCaps = result.title.toUpperCase();
       return allCaps.includes(input);
     });
     setFilteredResults(updatedResults);
