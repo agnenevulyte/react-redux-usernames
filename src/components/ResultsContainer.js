@@ -7,7 +7,7 @@ export default function ResultsContainer({ results, filteredResults }) {
       {filteredResults && filteredResults.length > 0 ? (
         <ul>
           {filteredResults.map((each, i) => (
-            <li className="fadeIn" key={i} className="margin-top">
+            <li key={i} className="fadeIn margin-top">
               {each.title}
             </li>
           ))}
