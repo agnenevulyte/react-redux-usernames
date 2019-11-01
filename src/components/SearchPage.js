@@ -10,6 +10,8 @@ export default function SearchPage() {
   const [results, setResults] = useState([]);
   // 7. filtered results state
   const [filteredResults, setFilteredResults] = useState([]);
+  // 10. loading state
+  const [loading, setLoading] = useState(false);
 
   // 4. when the component mounts, call the API
   useEffect(() => {
@@ -23,19 +25,23 @@ export default function SearchPage() {
 
   // 5. Fetch the users and store them in results state
   const getUsers = async () => {
+    setLoading(true);
     try {
-      let response = await fetch(`https://jsonplaceholder.typicode.com/albums`);
+      let response = await fetch(`https://jsonplaceholder.typicode.com/photos`);
       let data = await response.json();
-      return setResults(data);
+      console.log(data);
+      setResults(data);
+      return setLoading(false);
     } catch (err) {
       console.log(err);
+      return setLoading(false);
     }
   };
 
   // 8. filtering state `results`
   const filterResults = () => {
     const updatedResults = results.filter(result => {
-      const allCaps = result.title.toUpperCase();
+      const allCaps = result.title.toLowerCase();
       return allCaps.includes(input);
     });
     setFilteredResults(updatedResults);
@@ -43,7 +49,7 @@ export default function SearchPage() {
 
   // 2. stored input on change
   const handleChange = event => {
-    setInput(event.target.value.toUpperCase());
+    setInput(event.target.value.toLowerCase());
   };
 
   return (
@@ -52,7 +58,11 @@ export default function SearchPage() {
       {/* 3. passing handleChange down to the SearchBar.js */}
       <SearchBar input={input} handleChange={handleChange} />
       {/* 6. passing the results down to the ResultsContainer.js */}
-      <ResultsContainer results={results} filteredResults={filteredResults} />
+      <ResultsContainer
+        loading={loading}
+        results={results}
+        filteredResults={filteredResults}
+      />
     </div>
   );
 }
