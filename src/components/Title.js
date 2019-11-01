@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Title() {
+export default function Title({ text }) {
   return (
     <div>
-      <h1>Title</h1>
+      <h1>{text}</h1>
     </div>
   );
 }

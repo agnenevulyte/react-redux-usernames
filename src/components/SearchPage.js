@@ -30,7 +30,7 @@ export default function SearchPage() {
     try {
       let response = await fetch(`https://jsonplaceholder.typicode.com/photos`);
       let data = await response.json();
-      console.log(data);
+      // console.log(data);
       setResults(data);
       // 11. setLoading back to false
       return setLoading(false);
@@ -55,14 +55,9 @@ export default function SearchPage() {
     setInput(event.target.value.toLowerCase());
   };
 
-  // 12. Button click function
-  const showAll = () => {
-    console.log("button clicking okay");
-  };
-
   return (
     <div>
-      <Title />
+      <Title text="Album Search" />
       {/* 3. passing handleChange down to the SearchBar.js */}
       <SearchBar input={input} handleChange={handleChange} />
       {/* 6. passing the results down to the ResultsContainer.js */}
@@ -70,7 +65,6 @@ export default function SearchPage() {
         loading={loading}
         results={results}
         filteredResults={filteredResults}
-        showAll={showAll}
       />
     </div>
   );
