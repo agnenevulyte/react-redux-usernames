@@ -3,13 +3,21 @@ import React, { useState } from "react";
 export default function ResultsContainer({ results, filteredResults, loading }) {
 
   const [showAllBoolean, setShowAllBoolean] = useState(false);
+  const [ selectedAlbums, updateSelectedAlbums ] = useState([]);
 
   function showAll() {
     setShowAllBoolean(true);
   }
 
-  console.log('showAll is ', showAllBoolean);
+  function selectAlbum(obj) {
+    console.log('Album Selected: ', obj);
+    let arr = selectedAlbums;
+    arr.push(obj);
+    return updateSelectedAlbums(arr);
+  }
 
+
+  console.log('Selected Albums Are Now: ', selectedAlbums);
   return (
     <div>
       <h4>Results: </h4>
@@ -19,7 +27,7 @@ export default function ResultsContainer({ results, filteredResults, loading }) 
         <>
           <ul>
             {filteredResults.map((each, i) => (
-              <li key={i} className="fadeIn margin-top">
+              <li key={i} className="fadeIn margin-top" onClick={() => selectAlbum(each)}>
                 {each.title}
               </li>
             ))}
@@ -32,7 +40,7 @@ export default function ResultsContainer({ results, filteredResults, loading }) 
       ) : (
           <ul>
             {results.map((each, i) => (
-              <li key={i} className="margin-top">
+              <li key={i} className="margin-top" onClick={() => selectAlbum(each)}>
                 {each.title}
               </li>
             ))}
