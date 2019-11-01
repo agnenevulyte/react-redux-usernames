@@ -25,15 +25,18 @@ export default function SearchPage() {
 
   // 5. Fetch the users and store them in results state
   const getUsers = async () => {
+    // 11. setLoading to true
     setLoading(true);
     try {
       let response = await fetch(`https://jsonplaceholder.typicode.com/photos`);
       let data = await response.json();
       console.log(data);
       setResults(data);
+      // 11. setLoading back to false
       return setLoading(false);
     } catch (err) {
       console.log(err);
+      // 11. setLoading back to false
       return setLoading(false);
     }
   };
@@ -52,6 +55,11 @@ export default function SearchPage() {
     setInput(event.target.value.toLowerCase());
   };
 
+  // 12. Button click function
+  const showAll = () => {
+    console.log("button clicking okay");
+  };
+
   return (
     <div>
       <Title />
@@ -62,6 +70,7 @@ export default function SearchPage() {
         loading={loading}
         results={results}
         filteredResults={filteredResults}
+        showAll={showAll}
       />
     </div>
   );
