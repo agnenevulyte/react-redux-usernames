@@ -3,7 +3,7 @@ import Title from "./Title";
 import SearchBar from "./SearchBar";
 import ResultsContainer from "./ResultsContainer";
 
-export default function SearchPage() {
+export default function SearchPage({ togglePage }) {
   // 1. stored input
   const [input, setInput] = useState("");
   // 1. results state
@@ -57,7 +57,8 @@ export default function SearchPage() {
 
   return (
     <div>
-      <Title text="Album Search" />
+      <Title text="Search Page" />
+      <button onClick={togglePage}>About Page</button>
       {/* 3. passing handleChange down to the SearchBar.js */}
       <SearchBar input={input} handleChange={handleChange} />
       {/* 6. passing the results down to the ResultsContainer.js */}
